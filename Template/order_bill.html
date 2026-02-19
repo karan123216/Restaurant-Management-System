@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block main %}
+
+<h2>Order Bill</h2>
+
+<p><b>Customer:</b> {{ order.user.username }}</p>
+<p><b>Date:</b> {{ date }}</p>
+<p><b>Order ID:</b> {{ order.id }}</p>
+
+<table border="1" cellpadding="10">
+<tr>
+  <th>Item</th>
+  <th>Qty</th>
+  <th>Price</th>
+  <th>Total</th>
+</tr>
+
+{% for i in bill_items %}
+<tr>
+  <td>{{ i.name }}</td>
+  <td>{{ i.qty }}</td>
+  <td>{{ i.price }}</td>
+  <td>{{ i.total }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Grand Total: ₹{{ total }}</h3>
+
+<button onclick="printBill()" class="btn btn-primary">
+    Print Bill
+</button>
+
+<a href="{% url 'Home' %}" class="btn btn-success">Back to Home</a>
+
+<script>
+function printBill() {
+    window.print();
+}
+</script>
+
+{% endblock %}

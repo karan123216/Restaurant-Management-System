@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block main %}
+
+<h2>Your Order</h2>
+
+<table border="1">
+<tr>
+  <th>Item</th>
+  <th>Qty</th>
+  <th>Price</th>
+</tr>
+
+{% for c in cart_items %}
+<tr>
+  <td>{{ c.item.Item_name }}</td>
+  <td>{{ c.quantity }}</td>
+  <td>{{ c.item.Price }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Total: ₹{{ total }}</h3>
+
+<form method="post" action="{% url 'place_order' %}">
+  {% csrf_token %}
+  <button type="submit">Place Order</button>
+</form>
+
+{% endblock %}
